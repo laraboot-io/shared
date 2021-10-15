@@ -1,4 +1,4 @@
-module github.com/golang-templates/seed
+module github.com/laraboot-io/shared
 
 go 1.16
 
