@@ -31,7 +31,7 @@ func NewFromString(jsonData string) (
 func NewFromFile(filename string) (LarabootStruct, error) {
 	var m LarabootStruct
 	var (
-		file, errReadingJSONFile = os.Open(filename) //nolint:gosec
+		file, errReadingJSONFile = os.Open(filename)
 	)
 
 	if errReadingJSONFile != nil {

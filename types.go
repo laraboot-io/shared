@@ -1,5 +1,6 @@
 package main
 
+// LarabootStruct : Laraboot file schema.
 type LarabootStruct struct {
 	Version   string `json:"version"`
 	ProjectID string `json:"project_id"`
