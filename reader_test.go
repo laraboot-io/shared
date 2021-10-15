@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_larabootstruct_from_string(t *testing.T) { //nolint:unparam //cus
+func Test_larabootstruct_from_string(t *testing.T) {
 	got, _ := NewFromString(`
     {"Name": "Alice", "Age": 25}
 `)
