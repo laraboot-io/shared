@@ -24,13 +24,12 @@ func NewFromString(jsonData string) (
 	}
 
 	return m, nil
-
 }
 
 // NewFromFile :Reads JSON data from file and returns the parsed map.
 func NewFromFile(filename string) (LarabootStruct, error) {
 	var m LarabootStruct
-	file, errReadingJSONFile := os.Open(filename)
+	file, errReadingJSONFile := os.Open(filename) //nolint:gosec //cus
 
 	if errReadingJSONFile != nil {
 		return m, errReadingJSONFile
