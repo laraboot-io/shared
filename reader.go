@@ -1,4 +1,4 @@
-// Laraboot shared tools
+// Package shared contains all shared public dependencies and definitions
 package shared
 
 import (
