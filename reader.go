@@ -1,4 +1,5 @@
-package main
+// Laraboot shared tools
+package shared
 
 import (
 	"encoding/json"

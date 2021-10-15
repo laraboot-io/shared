@@ -1,4 +1,4 @@
-package main
+package shared
 
 // LarabootStruct : Laraboot file schema.
 type LarabootStruct struct {

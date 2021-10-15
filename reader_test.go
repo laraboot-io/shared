@@ -1,4 +1,4 @@
-package main
+package shared
 
 import (
 	"testing"
@@ -6,17 +6,10 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_greet(t *testing.T) {
-	got := greet()
-
-	assert.Equal(t, "Hi!", got, "should properly greet")
-}
-
-func Test_larabootstruct_from_string(t *testing.T) { //nolint:unparam //unused
+func Test_larabootstruct_from_string(t *testing.T) { //nolint:unparam
 	got, _ := NewFromString(`
     {"Name": "Alice", "Age": 25}
 `)
-
 	assert.ObjectsAreEqual(map[string]interface{}{"Age": 25, "Name": "Alice"}, got)
 }
 
