@@ -12,7 +12,7 @@ func Test_greet(t *testing.T) {
 	assert.Equal(t, "Hi!", got, "should properly greet")
 }
 
-func Test_larabootstruct_from_string(t *testing.T) { //nolint:unparam
+func Test_larabootstruct_from_string(t *testing.T) { //nolint:unparam //unused
 	got, _ := NewFromString(`
     {"Name": "Alice", "Age": 25}
 `)
