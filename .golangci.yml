@@ -36,13 +36,13 @@ linters:
     - exportloopref
     - forcetypeassert
     - funlen
-    - gci
+    # - gci
     - gocognit
     - goconst
     - gocritic
     - gocyclo
     - godot
-    - gofumpt
+    # - gofumpt
     - golint
     - gomnd
     - goprintffuncname
