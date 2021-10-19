@@ -1,6 +1,8 @@
 before:
   hooks:
     - go mod download
+build:
+  skip: true
 builds:
 - env:
     - CGO_ENABLED=0
