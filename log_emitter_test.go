@@ -2,7 +2,6 @@ package shared
 
 import (
 	"bytes"
-	"fmt"
 	. "github.com/onsi/gomega"
 	"github.com/paketo-buildpacks/packit"
 	"github.com/sclevine/spec"
@@ -38,9 +37,4 @@ func TestLogEmitter(
 			})
 		},
 	)
-}
-
-func fail(message string, skip ...int) {
-	fmt.Println(message)
-	fmt.Println(skip)
 }
