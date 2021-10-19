@@ -1,11 +1,10 @@
 before:
   hooks:
     - go mod download
-build:
-  skip: true
 builds:
 - env:
     - CGO_ENABLED=0
+  skip: true
   goos:
     - darwin
     - linux
