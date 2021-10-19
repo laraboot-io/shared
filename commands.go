@@ -1,8 +1,9 @@
 package shared
 
 import (
-	"github.com/paketo-buildpacks/packit"
 	"os/exec"
+
+	"github.com/paketo-buildpacks/packit"
 )
 
 // RunCommand runs a composer command .

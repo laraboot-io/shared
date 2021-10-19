@@ -2,10 +2,11 @@ package shared
 
 import (
 	"bytes"
+	"testing"
+
 	. "github.com/onsi/gomega"
 	"github.com/paketo-buildpacks/packit"
 	"github.com/sclevine/spec"
-	"testing"
 )
 
 func TestLogEmitter(

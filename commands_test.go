@@ -2,11 +2,12 @@ package shared
 
 import (
 	"fmt"
+	"io/ioutil"
+	"testing"
+
 	. "github.com/onsi/gomega"
 	"github.com/paketo-buildpacks/packit"
 	"github.com/sclevine/spec"
-	"io/ioutil"
-	"testing"
 )
 
 func TestCommands(
@@ -17,14 +18,9 @@ func TestCommands(
 	spec.Run(
 		t,
 		"Run",
-		func(
-			t *testing.T,
-			when spec.G,
-			it spec.S) {
-
+		func(t *testing.T, when spec.G, it spec.S) {
 			var (
-				Expect = NewWithT(t).Expect
-
+				Expect       = NewWithT(t).Expect
 				layersDir    string
 				cnbDir       string
 				buildContext packit.BuildContext
