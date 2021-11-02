@@ -62,7 +62,7 @@ func TestContributor(t *testing.T) {
 				Expect(err).To(BeNil())
 				Expect(somePackage).NotTo(BeNil())
 				install, err := somePackage.Install()
-				Expect(err).To(BeNil())
+				Expect(err).To(BeNil(), string(install))
 				Expect(string(install)).To(ContainSubstring("ok"))
 			})
 		},
