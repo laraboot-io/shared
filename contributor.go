@@ -77,7 +77,7 @@ extension=curl`,
 		composerPath,
 	}
 	if l.global {
-		args = append(args, "global")
+		args = append(args, []string{"global"}...)
 	}
 
 	args = append([]string{}, "require", l.name, "--prefer-stable", "-W")
