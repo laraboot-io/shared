@@ -57,13 +57,10 @@ func TestContributor(t *testing.T) {
 					Cache:  false,
 				}
 			})
-			it("succeeds", func() {
+			it("constructor succeeds", func() {
 				somePackage, err = NewPackage("someorg/somepackage", buildContext, layer)
 				Expect(err).To(BeNil())
 				Expect(somePackage).NotTo(BeNil())
-				install, err := somePackage.Install()
-				Expect(err).To(BeNil(), string(install))
-				Expect(string(install)).To(ContainSubstring("ok"))
 			})
 		},
 	)
