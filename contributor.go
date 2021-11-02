@@ -69,18 +69,19 @@ extension=curl`,
 	}
 
 	// installation args
-	var args = []string{
+	args := []string{
 		fmt.Sprintf("-dextension_dir=%s", os.Getenv("PHP_EXTENSION_DIR")),
 		fmt.Sprintf("-derror_reporting=%s", "E_ALL"),
 		"-c",
 		l.customIniPath,
 		composerPath,
 	}
+
 	if l.global {
 		args = append(args, []string{"global"}...)
 	}
 
-	args = append([]string{}, "require", l.name, "--prefer-stable", "-W")
+	args = append(args, []string{"require", l.name, "--prefer-stable", "-W"}...)
 
 	return RunCommand(l.context, "php", args...)
 }
