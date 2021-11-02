@@ -11,7 +11,7 @@ import (
 	"github.com/paketo-buildpacks/packit"
 )
 
-// Package represents a PHP contribution by the buildpack
+// Package represents a PHP contribution by the buildpack.
 type Package struct {
 	name          string
 	global        bool
@@ -52,7 +52,7 @@ func (l Package) WriteCustomInitFile(templateBody string, outputPath string, dat
 }
 
 // Install the package
-// It requieres `composer buildpack` to run the installation
+// It requieres `composer buildpack` to run the installation.
 func (l Package) Install() ([]byte, error) {
 	l.logger.Detail("Package installation...")
 	composerLayerPath := "/layers/paketo-buildpacks_php-composer/composer"
@@ -69,16 +69,15 @@ extension=curl`,
 	}
 
 	// installation args
-	args := []string{
+	var args = []string{
 		fmt.Sprintf("-dextension_dir=%s", os.Getenv("PHP_EXTENSION_DIR")),
 		fmt.Sprintf("-derror_reporting=%s", "E_ALL"),
 		"-c",
 		l.customIniPath,
 		composerPath,
 	}
-
 	if l.global {
-		args = append([]string{}, "global")
+		args = append(args, "global")
 	}
 
 	args = append([]string{}, "require", l.name, "--prefer-stable", "-W")
