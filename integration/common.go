@@ -15,10 +15,11 @@ import (
 )
 
 var (
-	composerOfflineURI string
-	phpDistOfflineURI  string
-	phpWebOfflineURI   string
-	buildpackInfo      struct {
+	sharedOfflineURI      string
+	phpDistOfflineURI     string
+	phpWebOfflineURI      string
+	phpComposerOfflineURI string
+	buildpackInfo         struct {
 		Buildpack struct {
 			ID   string
 			Name string
@@ -40,21 +41,32 @@ func PreparePhpOfflineBps() {
 	bpRoot, err := filepath.Abs("./..")
 	Expect(err).ToNot(HaveOccurred())
 
-	composerOfflineURI, err = Package(bpRoot, "1.2.3", true)
+	sharedOfflineURI, err = Package(bpRoot, "1.2.3", true)
 	Expect(err).ToNot(HaveOccurred())
 
 	buildpackStore := occam.NewBuildpackStore()
+
+	// phpDistRepo, err := dagger.GetLatestUnpackagedCommunityBuildpack("paketo-buildpacks", "php-dist")
+	// Expect(err).NotTo(HaveOccurred())
+	//
+	// phpDistOfflineURI, err = Package(phpDistRepo, "1.2.3", true)
+	// Expect(err).ToNot(HaveOccurred())
 
 	phpDistOfflineURI, err = buildpackStore.Get.
 		WithVersion("1.2.3").
 		WithOfflineDependencies().
 		Execute(config.PhpDistOffline)
-	Expect(err).ToNot(HaveOccurred())
 
 	phpWebRepo, err := dagger.GetLatestUnpackagedCommunityBuildpack("paketo-buildpacks", "php-web")
 	Expect(err).NotTo(HaveOccurred())
 
 	phpWebOfflineURI, err = Package(phpWebRepo, "1.2.3", true)
+	Expect(err).ToNot(HaveOccurred())
+
+	phpComposerRepo, err := dagger.GetLatestUnpackagedCommunityBuildpack("paketo-buildpacks", "php-composer")
+	Expect(err).NotTo(HaveOccurred())
+
+	phpComposerOfflineURI, err = Package(phpComposerRepo, "1.2.3", true)
 	Expect(err).ToNot(HaveOccurred())
 }
 

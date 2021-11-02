@@ -2,8 +2,6 @@ package integration
 
 import (
 	"fmt"
-	"io/ioutil"
-	"net/http"
 	"os"
 	"path/filepath"
 	"testing"
@@ -13,7 +11,6 @@ import (
 	"github.com/sclevine/spec"
 
 	. "github.com/onsi/gomega"
-	. "github.com/paketo-buildpacks/occam/matchers"
 )
 
 func testOffline(t *testing.T, context spec.G, it spec.S) {
@@ -33,7 +30,7 @@ func testOffline(t *testing.T, context spec.G, it spec.S) {
 	})
 
 	it.After(func() {
-		Expect(os.RemoveAll(composerOfflineURI)).To(Succeed())
+		Expect(os.RemoveAll(sharedOfflineURI)).To(Succeed())
 		Expect(os.RemoveAll(phpDistOfflineURI)).To(Succeed())
 		Expect(os.RemoveAll(phpWebOfflineURI)).To(Succeed())
 	})
@@ -61,13 +58,14 @@ func testOffline(t *testing.T, context spec.G, it spec.S) {
 
 		it("creates a working OCI image that serves web pages using php composer", func() {
 			var err error
-			source, err = occam.Source(filepath.Join("testdata", "composer_app_with_vendor"))
+			source, err = occam.Source(filepath.Join("testdata", "sandbox"))
 			Expect(err).NotTo(HaveOccurred())
 
 			var logs fmt.Stringer
 			image, logs, err = pack.WithNoColor().Build.
 				WithPullPolicy("never").
-				WithBuildpacks(phpDistOfflineURI, composerOfflineURI, phpWebOfflineURI).
+				WithTrustBuilder().
+				WithBuildpacks(phpDistOfflineURI, phpComposerOfflineURI, phpWebOfflineURI).
 				WithNetwork("none").
 				Execute(name, source)
 			Expect(err).NotTo(HaveOccurred(), logs.String())
@@ -80,18 +78,6 @@ func testOffline(t *testing.T, context spec.G, it spec.S) {
 				WithPublish("8080").
 				Execute(image.ID)
 			Expect(err).ToNot(HaveOccurred())
-
-			Eventually(container).Should(BeAvailable(), logs.String())
-
-			response, err := http.Get(fmt.Sprintf("http://localhost:%s", container.HostPort("8080")))
-			Expect(err).NotTo(HaveOccurred())
-			Expect(response.StatusCode).To(Equal(http.StatusOK))
-
-			content, err := ioutil.ReadAll(response.Body)
-			Expect(err).NotTo(HaveOccurred())
-
-			Expect(response.Body.Close()).To(Succeed())
-			Expect(string(content)).To(ContainSubstring("OK"))
 		})
 	})
 }
