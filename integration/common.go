@@ -96,7 +96,6 @@ func MakeBuildEnv(debug bool) map[string]string {
 	if debug {
 		env["BP_DEBUG"] = "true"
 	}
-
 	githubToken := os.Getenv("GIT_TOKEN")
 	if githubToken != "" {
 		env["COMPOSER_GITHUB_OAUTH_TOKEN"] = githubToken
