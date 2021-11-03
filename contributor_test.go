@@ -22,7 +22,7 @@ func TestContributor(t *testing.T) {
 				Expect       = NewWithT(t).Expect
 				layersDir    string
 				cnbDir       string
-				somePackage  Package
+				somePackage  Contributor
 				layer        packit.Layer
 				buildContext packit.BuildContext
 			)
@@ -58,20 +58,20 @@ func TestContributor(t *testing.T) {
 				}
 			})
 			it("constructor succeeds", func() {
-				somePackage, err = NewPackage("someorg/somepackage", buildContext, layer)
+				somePackage, err = NewContributor("someorg/somepackage", buildContext, layer)
 				Expect(err).To(BeNil())
 				Expect(somePackage).NotTo(BeNil())
 
-				somePackage, err = NewGlobalPackage("someorg/somepackage", buildContext, layer)
+				somePackage, err = NewGlobalContributor("someorg/somepackage", buildContext, layer)
 				Expect(err).To(BeNil())
 				Expect(somePackage).NotTo(BeNil())
 			})
 			it("grab version from package name if the name has a colon on it", func() {
-				somePackage, err = NewPackage("someorg/somepackage:1.2.3", buildContext, layer)
+				somePackage, err = NewContributor("someorg/somepackage:1.2.3", buildContext, layer)
 				Expect(err).To(BeNil())
 				Expect(somePackage.version).To(Equal("1.2.3"))
 
-				globalPackage, err := NewGlobalPackage("someorg/somepackage:1.2.3", buildContext, layer)
+				globalPackage, err := NewGlobalContributor("someorg/somepackage:1.2.3", buildContext, layer)
 				Expect(err).To(BeNil())
 				Expect(globalPackage).NotTo(BeNil())
 			})
