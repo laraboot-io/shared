@@ -26,15 +26,17 @@ type Package struct {
 
 // NewPackage creates a new Package instance.
 func NewPackage(name string, context packit.BuildContext, layer packit.Layer) (Package, error) {
+	var packageName = name
 	var version = "latest"
 
 	if strings.Contains(name, "@") {
 		tokens := strings.Split(name, "@")
+		packageName = tokens[0]
 		version = tokens[1]
 	}
 
 	contributor := Package{
-		name:          name,
+		name:          packageName,
 		version:       version,
 		layer:         layer,
 		layers:        context.Layers,
