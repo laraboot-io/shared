@@ -56,14 +56,14 @@ func testOffline(t *testing.T, context spec.G, it spec.S) {
 			Expect(os.RemoveAll(source)).To(Succeed())
 		})
 
-		it("creates a working OCI image that serves web pages using php composer", func() {
+		it("creates a working OCI image that serves a simple php application", func() {
 			var err error
 			source, err = occam.Source(filepath.Join("testdata", "sandbox"))
 			Expect(err).NotTo(HaveOccurred())
 
 			var logs fmt.Stringer
 			image, logs, err = pack.WithNoColor().Build.
-				WithPullPolicy("never").
+				WithPullPolicy("Always").
 				WithTrustBuilder().
 				WithBuildpacks(phpDistOfflineURI, phpComposerOfflineURI, phpWebOfflineURI).
 				WithNetwork("none").

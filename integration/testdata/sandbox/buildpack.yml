@@ -1,5 +1,5 @@
 ---
 php:
-  version: 7.4.x
+  version: 8.0.x
   webserver: php-server
   script: index.php

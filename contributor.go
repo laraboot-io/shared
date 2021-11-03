@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"text/template"
 
 	"github.com/cloudfoundry/libcfbuildpack/helper"
@@ -14,6 +15,7 @@ import (
 // Package represents a PHP contribution by the buildpack.
 type Package struct {
 	name          string
+	version       string
 	global        bool
 	logger        LogEmitter
 	customIniPath string
@@ -24,8 +26,16 @@ type Package struct {
 
 // NewPackage creates a new Package instance.
 func NewPackage(name string, context packit.BuildContext, layer packit.Layer) (Package, error) {
+	var version = "latest"
+
+	if strings.Contains(name, "@") {
+		tokens := strings.Split(name, "@")
+		version = tokens[1]
+	}
+
 	contributor := Package{
 		name:          name,
+		version:       version,
 		layer:         layer,
 		layers:        context.Layers,
 		logger:        NewLogEmitter(os.Stdout),
@@ -81,7 +91,12 @@ extension=curl`,
 		args = append(args, []string{"global"}...)
 	}
 
-	args = append(args, []string{"require", l.name, "--prefer-stable", "-W"}...)
+	args = append(args, []string{
+		"require",
+		fmt.Sprintf("%s@%s", l.name, l.version),
+		"--prefer-stable",
+		"-W",
+	}...)
 
 	return RunCommand(l.context, "php", args...)
 }
