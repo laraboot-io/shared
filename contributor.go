@@ -105,7 +105,7 @@ extension=curl`,
 
 	args = append(args, []string{
 		"require",
-		fmt.Sprintf("%s@%s", l.name, l.version),
+		fmt.Sprintf("%s %s", l.name, l.version),
 		"--prefer-stable",
 		"-W",
 	}...)
