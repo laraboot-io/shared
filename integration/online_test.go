@@ -63,7 +63,7 @@ func testOffline(t *testing.T, context spec.G, it spec.S) {
 
 			var logs fmt.Stringer
 			image, logs, err = pack.WithNoColor().Build.
-				WithPullPolicy("Always").
+				WithPullPolicy("always").
 				WithTrustBuilder().
 				WithBuildpacks(phpDistOfflineURI, phpComposerOfflineURI, phpWebOfflineURI).
 				WithNetwork("none").
