@@ -24,7 +24,7 @@ type Package struct {
 	layers        packit.Layers
 }
 
-// NewGlobalPackage creates a Package instance and set global = true
+// NewGlobalPackage creates a Package instance and set global = true.
 func NewGlobalPackage(name string, context packit.BuildContext, layer packit.Layer) (Package, error) {
 	newPackage, err := NewPackage(name, context, layer)
 	if err != nil {
