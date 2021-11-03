@@ -61,7 +61,21 @@ func TestContributor(t *testing.T) {
 				somePackage, err = NewPackage("someorg/somepackage", buildContext, layer)
 				Expect(err).To(BeNil())
 				Expect(somePackage).NotTo(BeNil())
+
+				somePackage, err = NewGlobalPackage("someorg/somepackage", buildContext, layer)
+				Expect(err).To(BeNil())
+				Expect(somePackage).NotTo(BeNil())
 			})
+			it("grab version from package name if the name has a colon on it", func() {
+				somePackage, err = NewPackage("someorg/somepackage:1.2.3", buildContext, layer)
+				Expect(err).To(BeNil())
+				Expect(somePackage.version).To(Equal("1.2.3"))
+
+				globalPackage, err := NewGlobalPackage("someorg/somepackage:1.2.3", buildContext, layer)
+				Expect(err).To(BeNil())
+				Expect(globalPackage).NotTo(BeNil())
+			})
+
 		},
 	)
 }

@@ -24,13 +24,23 @@ type Package struct {
 	layers        packit.Layers
 }
 
+// NewGlobalPackage creates a Package instance and set global = true
+func NewGlobalPackage(name string, context packit.BuildContext, layer packit.Layer) (Package, error) {
+	newPackage, err := NewPackage(name, context, layer)
+	if err != nil {
+		return Package{}, err
+	}
+	newPackage.global = true
+	return newPackage, nil
+}
+
 // NewPackage creates a new Package instance.
 func NewPackage(name string, context packit.BuildContext, layer packit.Layer) (Package, error) {
 	var packageName = name
 	var version = "latest"
 
-	if strings.Contains(name, "@") {
-		tokens := strings.Split(name, "@")
+	if strings.Contains(name, ":") {
+		tokens := strings.Split(name, ":")
 		packageName = tokens[0]
 		version = tokens[1]
 	}
