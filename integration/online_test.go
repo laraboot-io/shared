@@ -66,7 +66,7 @@ func testOffline(t *testing.T, context spec.G, it spec.S) {
 				WithPullPolicy("always").
 				WithTrustBuilder().
 				WithBuildpacks(phpDistOfflineURI, phpComposerOfflineURI, phpWebOfflineURI).
-				WithNetwork("none").
+				WithNetwork("default").
 				Execute(name, source)
 			Expect(err).NotTo(HaveOccurred(), logs.String())
 
