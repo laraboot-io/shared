@@ -113,7 +113,7 @@ extension=curl`,
 	command, err := RunCommand(l.context, "php", args...)
 
 	if err != nil {
-		return nil, err
+		return command, err
 	}
 
 	l.logger.Break()
