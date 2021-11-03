@@ -1,3 +1,10 @@
+# options for analysis running
+run:
+  # include test files or not, default is true
+  tests: false
+  skip-dirs:
+    - integration
+
 linters-settings:
   goimports:
     local-prefixes: github.com/laraboot-io/shared

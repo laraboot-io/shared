@@ -2,11 +2,12 @@
 
 .PHONY: dev
 dev: ## dev build
-dev: clean install generate vet fmt lint test mod-tidy
+dev: clean install generate vet fmt lint test integration mod-tidy
 
 .PHONY: ci
 ci: ## CI build
-ci: dev diff
+#ci: dev diff
+ci: dev
 
 .PHONY: clean
 clean: ## remove files created during build pipeline
@@ -23,6 +24,11 @@ install: ## go install tools
 generate: ## go generate
 	$(call print-target)
 	go generate ./...
+
+.PHONY: integration
+integration: ##
+	chmod -R +x ./scripts
+	./scripts/integration.sh
 
 .PHONY: vet
 vet: ## go vet
@@ -42,7 +48,7 @@ lint: ## golangci-lint
 .PHONY: test
 test: ## go test with race detector and code covarage
 	$(call print-target)
-	go test -race -covermode=atomic -coverprofile=coverage.out ./...
+	go test -count=1 -timeout 0 . -v -race -covermode=atomic -coverprofile=coverage.out ./...
 	go tool cover -html=coverage.out -o coverage.html
 
 .PHONY: mod-tidy
