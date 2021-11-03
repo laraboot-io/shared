@@ -66,7 +66,7 @@ func testOffline(t *testing.T, context spec.G, it spec.S) {
 			image, logs, err = pack.WithNoColor().Build.
 				WithPullPolicy("always").
 				WithTrustBuilder().
-				WithBuildpacks(phpDistOfflineURI, phpComposerOfflineURI, phpWebOfflineURI).
+				WithBuildpacks(phpDistOfflineURI, phpComposerOfflineURI, phpWebOfflineURI, sharedOfflineURI).
 				WithNetwork("default").
 				Execute(name, source)
 			Expect(err).NotTo(HaveOccurred(), logs.String())
