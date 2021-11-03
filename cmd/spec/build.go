@@ -54,7 +54,7 @@ func Build(logger shared.LogEmitter) packit.BuildFunc {
 		fqq := fmt.Sprintf("%s:%s",
 			config.SmokeGunPackage.Name,
 			config.SmokeGunPackage.Version)
-		newPackage, err := shared.NewPackage(fqq, context, layer)
+		newPackage, err := shared.NewContributor(fqq, context, layer)
 
 		if err != nil {
 			return packit.BuildResult{}, err

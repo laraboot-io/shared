@@ -12,8 +12,8 @@ import (
 	"github.com/paketo-buildpacks/packit"
 )
 
-// Package represents a PHP contribution by the buildpack.
-type Package struct {
+// Contributor represents a PHP contribution by the buildpack.
+type Contributor struct {
 	name          string
 	version       string
 	global        bool
@@ -24,18 +24,18 @@ type Package struct {
 	layers        packit.Layers
 }
 
-// NewGlobalPackage creates a Package instance and set global = true.
-func NewGlobalPackage(name string, context packit.BuildContext, layer packit.Layer) (Package, error) {
-	newPackage, err := NewPackage(name, context, layer)
+// NewGlobalContributor creates a Contributor instance and set global = true.
+func NewGlobalContributor(name string, context packit.BuildContext, layer packit.Layer) (Contributor, error) {
+	newPackage, err := NewContributor(name, context, layer)
 	if err != nil {
-		return Package{}, err
+		return Contributor{}, err
 	}
 	newPackage.global = true
 	return newPackage, nil
 }
 
-// NewPackage creates a new Package instance.
-func NewPackage(name string, context packit.BuildContext, layer packit.Layer) (Package, error) {
+// NewContributor creates a new Contributor instance.
+func NewContributor(name string, context packit.BuildContext, layer packit.Layer) (Contributor, error) {
 	var packageName = name
 	var version = "latest"
 
@@ -45,7 +45,7 @@ func NewPackage(name string, context packit.BuildContext, layer packit.Layer) (P
 		version = tokens[1]
 	}
 
-	contributor := Package{
+	contributor := Contributor{
 		name:          packageName,
 		version:       version,
 		layer:         layer,
@@ -59,7 +59,7 @@ func NewPackage(name string, context packit.BuildContext, layer packit.Layer) (P
 }
 
 // WriteCustomInitFile writes an ini file.
-func (l Package) WriteCustomInitFile(templateBody string, outputPath string, data interface{}) error {
+func (l Contributor) WriteCustomInitFile(templateBody string, outputPath string, data interface{}) error {
 	t, err := template.New(filepath.Base(outputPath)).Parse(templateBody)
 	if err != nil {
 		return err
@@ -75,7 +75,7 @@ func (l Package) WriteCustomInitFile(templateBody string, outputPath string, dat
 
 // Install the package
 // It requieres `composer buildpack` to run the installation.
-func (l Package) Install() ([]byte, error) {
+func (l Contributor) Install() ([]byte, error) {
 	l.logger.Detail("Installing %s (%s):", l.name, l.version)
 	composerLayerPath := "/layers/paketo-buildpacks_php-composer/composer"
 	composerPath := fmt.Sprintf("%s/composer.phar", composerLayerPath)
