@@ -1,0 +1,6 @@
+{
+  "smoke-gun": {
+    "name": "monolog/monolog",
+    "version": "dev-main"
+  }
+}

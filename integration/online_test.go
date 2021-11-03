@@ -2,11 +2,12 @@ package integration
 
 import (
 	"fmt"
-	"github.com/onsi/gomega/format"
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
+
+	"github.com/onsi/gomega/format"
 
 	"github.com/paketo-buildpacks/occam"
 	"github.com/sclevine/spec"
@@ -72,7 +73,9 @@ func testOffline(t *testing.T, context spec.G, it spec.S) {
 			Expect(err).NotTo(HaveOccurred(), logs.String())
 
 			Expect(logs.String()).To(ContainSubstring(buildpackInfo.Buildpack.Name))
-			Expect(logs.String()).NotTo(ContainSubstring("Downloading"))
+			Expect(logs.String()).To(ContainSubstring(fmt.Sprintf("Installing %s (%s):",
+				smokeGunPackage.Name,
+				smokeGunPackage.Version)))
 
 			container, err = docker.Container.Run.
 				WithEnv(map[string]string{"PORT": "8080"}).

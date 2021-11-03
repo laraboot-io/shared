@@ -76,7 +76,7 @@ func (l Package) WriteCustomInitFile(templateBody string, outputPath string, dat
 // Install the package
 // It requieres `composer buildpack` to run the installation.
 func (l Package) Install() ([]byte, error) {
-	l.logger.Detail("Package installation...")
+	l.logger.Detail("Installing %s (%s):", l.name, l.version)
 	composerLayerPath := "/layers/paketo-buildpacks_php-composer/composer"
 	composerPath := fmt.Sprintf("%s/composer.phar", composerLayerPath)
 	err := l.WriteCustomInitFile(`extension=openssl
@@ -110,5 +110,12 @@ extension=curl`,
 		"-W",
 	}...)
 
-	return RunCommand(l.context, "php", args...)
+	command, err := RunCommand(l.context, "php", args...)
+
+	if err != nil {
+		return nil, err
+	}
+
+	l.logger.Break()
+	return command, nil
 }

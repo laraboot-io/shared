@@ -19,7 +19,11 @@ var (
 	phpDistOfflineURI     string
 	phpWebOfflineURI      string
 	phpComposerOfflineURI string
-	buildpackInfo         struct {
+	smokeGunPackage       struct {
+		Name    string `json:"name"`
+		Version string `json:"version"`
+	}
+	buildpackInfo struct {
 		Buildpack struct {
 			ID   string
 			Name string
@@ -35,8 +39,20 @@ func PreparePhpOfflineBps() {
 	file, err := os.Open("../integration.json")
 	Expect(err).ToNot(HaveOccurred())
 	defer file.Close()
-
 	Expect(json.NewDecoder(file).Decode(&config)).To(Succeed())
+
+	var cmdConfig struct {
+		SmokeGunPackage struct {
+			Name    string `json:"name"`
+			Version string `json:"version"`
+		} `json:"smoke-gun"`
+	}
+
+	// test-case
+	file, err = os.Open("../integration/testdata/sandbox/shared.json")
+	defer file.Close()
+	Expect(json.NewDecoder(file).Decode(&cmdConfig)).To(Succeed())
+	smokeGunPackage = cmdConfig.SmokeGunPackage
 
 	bpRoot, err := filepath.Abs("./..")
 	Expect(err).ToNot(HaveOccurred())
@@ -45,12 +61,6 @@ func PreparePhpOfflineBps() {
 	Expect(err).ToNot(HaveOccurred())
 
 	buildpackStore := occam.NewBuildpackStore()
-
-	// phpDistRepo, err := dagger.GetLatestUnpackagedCommunityBuildpack("paketo-buildpacks", "php-dist")
-	// Expect(err).NotTo(HaveOccurred())
-	//
-	// phpDistOfflineURI, err = Package(phpDistRepo, "1.2.3", true)
-	// Expect(err).ToNot(HaveOccurred())
 
 	phpDistOfflineURI, err = buildpackStore.Get.
 		WithVersion("1.2.3").
