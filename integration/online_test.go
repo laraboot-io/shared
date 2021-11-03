@@ -2,6 +2,7 @@ package integration
 
 import (
 	"fmt"
+	"github.com/onsi/gomega/format"
 	"os"
 	"path/filepath"
 	"testing"
@@ -19,7 +20,7 @@ func testOffline(t *testing.T, context spec.G, it spec.S) {
 		pack   occam.Pack
 		docker occam.Docker
 	)
-
+	format.MaxLength = 0
 	SetDefaultEventuallyTimeout(10 * time.Second)
 
 	it.Before(func() {
