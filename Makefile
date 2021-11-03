@@ -2,7 +2,7 @@
 
 .PHONY: dev
 dev: ## dev build
-dev: clean install generate tools vet fmt lint test mod-tidy
+dev: clean install generate vet fmt lint test integration mod-tidy
 
 .PHONY: ci
 ci: ## CI build
@@ -24,8 +24,8 @@ generate: ## go generate
 	$(call print-target)
 	go generate ./...
 
-.PHONY: tools
-tools: ##
+.PHONY: integration
+integration: ##
 	chmod -R +x ./scripts
 	./scripts/integration.sh
 
