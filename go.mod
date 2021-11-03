@@ -12,7 +12,7 @@ require (
 	github.com/mitchellh/mapstructure v1.4.2 // indirect
 	github.com/onsi/gomega v1.16.0
 	github.com/paketo-buildpacks/occam v0.1.4
-	github.com/paketo-buildpacks/packit v1.2.0
+	github.com/paketo-buildpacks/packit v1.3.0
 	github.com/sclevine/spec v1.4.0
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/net v0.0.0-20211101193420-4a448f8816b3 // indirect
