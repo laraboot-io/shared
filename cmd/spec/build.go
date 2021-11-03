@@ -33,7 +33,7 @@ func Build(logger shared.LogEmitter, clock chronos.Clock) packit.BuildFunc { //n
 			return packit.BuildResult{}, err
 		}
 
-		newPackage, err := shared.NewPackage("monolog/monolog:2.3.5", context, layer)
+		newPackage, err := shared.NewPackage("monolog/monolog:dev-main", context, layer)
 
 		if err != nil {
 			return packit.BuildResult{}, err
