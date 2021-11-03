@@ -26,7 +26,7 @@ generate: ## go generate
 
 .PHONY: tools
 tools: ##
-	chmod +x ./scripts/integration.sh
+	chmod -R +x ./scripts
 	./scripts/integration.sh
 
 .PHONY: vet
