@@ -10,9 +10,9 @@ require (
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/mattn/go-colorable v0.1.11 // indirect
 	github.com/mitchellh/mapstructure v1.4.2 // indirect
-	github.com/onsi/gomega v1.16.0
+	github.com/onsi/gomega v1.17.0
 	github.com/paketo-buildpacks/occam v0.1.4
-	github.com/paketo-buildpacks/packit v1.2.0
+	github.com/paketo-buildpacks/packit v1.3.1
 	github.com/sclevine/spec v1.4.0
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/net v0.0.0-20211101193420-4a448f8816b3 // indirect
