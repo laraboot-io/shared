@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	cloud.google.com/go v0.97.0 // indirect
-	github.com/BurntSushi/toml v0.4.1
+	github.com/BurntSushi/toml v1.0.0
 	github.com/cloudfoundry/dagger v0.0.0-20210608221517-19394daa0593
 	github.com/cloudfoundry/libcfbuildpack v1.91.23
 	github.com/fatih/color v1.13.0 // indirect
