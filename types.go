@@ -26,4 +26,14 @@ type LarabootStruct struct {
 			} `json:"columns"`
 		} `json:"models"`
 	} `json:"Framework"`
+	Build struct {
+		Tasks []struct {
+			Name   string `json:"name"`
+			Path   string `json:"path"`
+			Local  bool   `json:"local"`
+			Format string `json:"format"`
+			Env    struct {
+			} `json:"env"`
+		} `json:"tasks"`
+	} `json:"Build"`
 }
