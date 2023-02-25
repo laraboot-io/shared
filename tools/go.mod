@@ -211,7 +211,7 @@ require (
 	golang.org/x/net v0.0.0-20210505214959-0714010a04ed // indirect
 	golang.org/x/oauth2 v0.0.0-20210628180205-a41e5a781914 // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
-	golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/text v0.3.6 // indirect
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
 	golang.org/x/tools v0.1.5 // indirect
