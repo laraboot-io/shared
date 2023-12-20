@@ -7,8 +7,8 @@ import (
 	"os"
 
 	"github.com/laraboot-io/shared"
-	"github.com/paketo-buildpacks/packit"
 	"github.com/paketo-buildpacks/packit/postal"
+	packit "github.com/paketo-buildpacks/packit/v2"
 )
 
 type (
@@ -43,7 +43,7 @@ func Build(logger shared.LogEmitter) packit.BuildFunc {
 			} `json:"smoke-gun"`
 		}
 
-		var file, _ = os.Open("./shared.json")
+		file, _ := os.Open("./shared.json")
 		defer func(file *os.File) {
 			_ = file.Close()
 		}(file)
@@ -55,7 +55,6 @@ func Build(logger shared.LogEmitter) packit.BuildFunc {
 			config.SmokeGunPackage.Name,
 			config.SmokeGunPackage.Version)
 		newPackage, err := shared.NewContributor(fqq, context, layer)
-
 		if err != nil {
 			return packit.BuildResult{}, err
 		}

@@ -1,7 +1,7 @@
 package laraboot
 
 import (
-	"github.com/paketo-buildpacks/packit"
+	packit "github.com/paketo-buildpacks/packit/v2"
 )
 
 // Detect .

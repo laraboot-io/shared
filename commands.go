@@ -3,13 +3,12 @@ package shared
 import (
 	"os/exec"
 
-	"github.com/paketo-buildpacks/packit"
+	packit "github.com/paketo-buildpacks/packit/v2"
 )
 
 // RunCommand runs a composer command .
 func RunCommand(context packit.BuildContext, execName string, args ...string) ([]byte, error) {
 	path, err := exec.LookPath(execName)
-
 	if err != nil {
 		panic(err)
 	}

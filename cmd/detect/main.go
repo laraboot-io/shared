@@ -2,7 +2,7 @@ package main
 
 import (
 	laraboot "github.com/laraboot-io/shared/cmd/spec"
-	"github.com/paketo-buildpacks/packit"
+	packit "github.com/paketo-buildpacks/packit/v2"
 )
 
 func main() {

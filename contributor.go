@@ -9,7 +9,7 @@ import (
 	"text/template"
 
 	"github.com/cloudfoundry/libcfbuildpack/helper"
-	"github.com/paketo-buildpacks/packit"
+	"github.com/paketo-buildpacks/packit/v2"
 )
 
 // Contributor represents a PHP contribution by the buildpack.
@@ -36,8 +36,8 @@ func NewGlobalContributor(name string, context packit.BuildContext, layer packit
 
 // NewContributor creates a new Contributor instance.
 func NewContributor(name string, context packit.BuildContext, layer packit.Layer) (Contributor, error) {
-	var packageName = name
-	var version = "latest"
+	packageName := name
+	version := "latest"
 
 	if strings.Contains(name, ":") {
 		tokens := strings.Split(name, ":")
@@ -70,7 +70,7 @@ func (l Contributor) WriteCustomInitFile(templateBody string, outputPath string,
 	if err != nil {
 		return err
 	}
-	return helper.WriteFileFromReader(outputPath, 0644, &b) //nolint:gomnd //ignore
+	return helper.WriteFileFromReader(outputPath, 0o644, &b) //nolint:gomnd //ignore
 }
 
 // Install the package
@@ -85,7 +85,6 @@ extension=fileinfo
 extension=curl`,
 		l.customIniPath,
 		"")
-
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +110,6 @@ extension=curl`,
 	}...)
 
 	command, err := RunCommand(l.context, "php", args...)
-
 	if err != nil {
 		return command, err
 	}

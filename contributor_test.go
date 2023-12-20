@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	. "github.com/onsi/gomega"
-	"github.com/paketo-buildpacks/packit"
+	"github.com/paketo-buildpacks/packit/v2"
 	"github.com/sclevine/spec"
 )
 
@@ -16,7 +16,8 @@ func TestContributor(t *testing.T) {
 		func(
 			t *testing.T,
 			when spec.G,
-			it spec.S) {
+			it spec.S,
+		) {
 			var (
 				err          error
 				Expect       = NewWithT(t).Expect
@@ -75,7 +76,6 @@ func TestContributor(t *testing.T) {
 				Expect(err).To(BeNil())
 				Expect(globalPackage).NotTo(BeNil())
 			})
-
 		},
 	)
 }

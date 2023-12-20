@@ -4,8 +4,8 @@ import (
 	"os"
 
 	"github.com/laraboot-io/shared"
-	"github.com/laraboot-io/shared/cmd/spec"
-	"github.com/paketo-buildpacks/packit"
+	laraboot "github.com/laraboot-io/shared/cmd/spec"
+	packit "github.com/paketo-buildpacks/packit/v2"
 )
 
 func main() {
