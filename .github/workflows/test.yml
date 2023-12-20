@@ -5,6 +5,7 @@ on:
     branches:
       - dev
       - feature/*
+      - ft/*
   pull_request:
     branches: [ dev ]
   workflow_dispatch:
